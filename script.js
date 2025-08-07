@@ -4,7 +4,28 @@ console.log("@!@"); // Test log to check if script is loaded
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 // Define the size of each snake segment
+canvas.width = 300;
+canvas.height = 300;
 let scale = 10;
+
+let rows = canvas.height / scale;
+let column = canvas.width / scale;
+
+// Food constructor to manage the food's position and rendering
+function Food() {
+  this.x = 0;
+  this.y = 0;
+  // Generate a random location for the food within the game grid
+  this.generateRandomLocation = function () {
+    this.x = (Math.floor(Math.random() * rows - 1) + 1) * 10;
+    this.y = (Math.floor(Math.random() * column - 1) + 1) * 10;
+  };
+  // Draw the food on the canvas
+  this.foodDraw = function () {
+    ctx.fillStyle = "red";
+    ctx.fillRect(this.x, this.y, scale, scale);
+  };
+}
 
 // Define the Snake class
 function Snake() {
@@ -23,7 +44,7 @@ function Snake() {
   this.updateLocation = function () {
     this.x += this.xSpeed;
     this.y += this.ySpeed;
-    
+    // Wrap the snake around the screen when it goes beyond canvas boundaries
     if (this.x > canvas.width) {
       this.x = 0;
     } else if (this.x < 0) {
@@ -65,8 +86,11 @@ function Snake() {
 // Start the game once the window is fully loaded
 window.addEventListener("load", () => {
   let snake = new Snake(); // Create a new snake instance
+  let food = new Food(); // Create a new food instance
+  food.generateRandomLocation();
   setInterval(() => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    food.foodDraw();
     snake.snakeDraw();
     snake.updateLocation();
   }, 100);
