@@ -6,6 +6,15 @@
 > 🎮 یک بازی کلاسیک مار ساخته‌شده با Canvas در HTML5
 
 ---
+## 🎯 Project Goals | اهداف پروژه
+
+The main goal of this project is to create a simple, fun, and interactive Snake game using the HTML5 Canvas API.  
+It aims to demonstrate core JavaScript concepts, game logic, and canvas rendering techniques.  
+
+هدف اصلی این پروژه ساخت یک بازی مار ساده، سرگرم‌کننده و تعاملی با استفاده از Canvas در HTML5 است.  
+این پروژه قصد دارد مفاهیم پایه جاوااسکریپت، منطق بازی و تکنیک‌های رندرینگ در Canvas را نشان دهد.
+
+---
 
 ## 🌐 Live Demo | نسخه نمایشی آنلاین
 
