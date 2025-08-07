@@ -23,29 +23,39 @@ function Snake() {
   this.updateLocation = function () {
     this.x += this.xSpeed;
     this.y += this.ySpeed;
+    
+    if (this.x > canvas.width) {
+      this.x = 0;
+    } else if (this.x < 0) {
+      this.x = canvas.width;
+    } else if (this.y > canvas.height) {
+      this.y = 0;
+    } else if (this.y < 0) {
+      this.y = canvas.height;
+    }
   };
 
   //Function to control the direction of snake movement
   this.updateDirection = function (userDirection) {
     switch (userDirection) {
       case "Up": {
-        this.xSpeed = 0
-        this.ySpeed = -scale
+        this.xSpeed = 0;
+        this.ySpeed = -scale;
         break;
       }
       case "Down": {
-        this.xSpeed = 0
-        this.ySpeed = +scale
+        this.xSpeed = 0;
+        this.ySpeed = +scale;
         break;
       }
       case "Left": {
-        this.xSpeed = -scale
-        this.ySpeed = 0
+        this.xSpeed = -scale;
+        this.ySpeed = 0;
         break;
       }
       case "Right": {
-        this.xSpeed = +scale
-        this.ySpeed = 0
+        this.xSpeed = +scale;
+        this.ySpeed = 0;
         break;
       }
     }
@@ -62,8 +72,8 @@ window.addEventListener("load", () => {
   }, 100);
   // Listen for keyboard input to control the snake
   window.addEventListener("keydown", (event) => {
-    let userDirection = event.key.replace("Arrow", "")
-    snake.updateDirection(userDirection)
+    let userDirection = event.key.replace("Arrow", "");
+    snake.updateDirection(userDirection);
     console.log(userDirection);
   });
 });
