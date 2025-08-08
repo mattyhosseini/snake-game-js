@@ -81,6 +81,13 @@ function Snake() {
       }
     }
   };
+  // Check if the snake's head is on the food (i.e., food is eaten)
+  this.isEatFood = function (food) {
+    if (this.x === food.x && this.y === food.y) {
+      return true;
+    }
+    return false;
+  };
 }
 
 // Start the game once the window is fully loaded
@@ -93,11 +100,14 @@ window.addEventListener("load", () => {
     food.foodDraw();
     snake.snakeDraw();
     snake.updateLocation();
+    if (snake.isEatFood(food)) {
+      console.log("عه خورد");
+      food.generateRandomLocation();
+    }
   }, 100);
   // Listen for keyboard input to control the snake
   window.addEventListener("keydown", (event) => {
     let userDirection = event.key.replace("Arrow", "");
     snake.updateDirection(userDirection);
-    console.log(userDirection);
   });
 });
