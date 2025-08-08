@@ -35,15 +35,29 @@ function Snake() {
   // Initial movement direction (moving right)
   this.xSpeed = scale;
   this.ySpeed = 0;
+
+  this.total = 0;
+  this.tail = [];
+
   // Draw the snake on the canvas
   this.snakeDraw = function () {
     ctx.fillStyle = "#fff";
+    // Draw each segment of the snake's tail on the canvas
+    for (let i = 0; i < this.tail.length; i++) {
+      ctx.fillRect(this.tail[i].x, this.tail[i].y, scale, scale);
+    }
     ctx.fillRect(this.x, this.y, scale, scale);
   };
   // Update the snake's position based on its speed
   this.updateLocation = function () {
+    // Shift each segment of the tail forward by one position
+    for (let i = 0; i < this.tail.length - 1; i++) {
+      this.tail[i] = this.tail[i + 1];
+    }
+    this.tail[this.total - 1] = { x: this.x, y: this.y };
     this.x += this.xSpeed;
     this.y += this.ySpeed;
+
     // Wrap the snake around the screen when it goes beyond canvas boundaries
     if (this.x > canvas.width) {
       this.x = 0;
@@ -84,6 +98,7 @@ function Snake() {
   // Check if the snake's head is on the food (i.e., food is eaten)
   this.isEatFood = function (food) {
     if (this.x === food.x && this.y === food.y) {
+      this.total++;
       return true;
     }
     return false;
